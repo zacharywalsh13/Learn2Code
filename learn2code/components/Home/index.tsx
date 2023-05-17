@@ -12,8 +12,8 @@ export default function Home() {
         <>
         <Header />
         <Hero />
-        <Courses />
         <HowItWorks />
+        <Courses />
         <Testimonials />
         <AboutUs />
         <CallToAction />
