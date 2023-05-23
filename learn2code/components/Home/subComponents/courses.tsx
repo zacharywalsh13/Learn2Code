@@ -2,8 +2,11 @@
 import { courseList, userId } from "./courseData";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Courses() {
+  const router = useRouter();
+
   const [activeCourses, setActiveCourses] = useState<
     { course: string; percentage: number }[]
   >([]);
@@ -17,6 +20,7 @@ export default function Courses() {
         if (response.ok) {
           const data = await response.json();
           setActiveCourses(data.coursesActive);
+          console.log(data.coursesActive);
         }
       } catch (error) {
         console.error("Error fetching active courses", error);
@@ -40,6 +44,7 @@ export default function Courses() {
 
       if (response.ok) {
         console.log(`Course: ${courseTitle} added successfully`);
+        router.push(`Courses/${courseTitle}/Intro`);
       } else {
         console.log("Failed to add course");
       }
@@ -58,6 +63,7 @@ export default function Courses() {
         );
 
         return (
+          // <Link href = {`${course.title}`}>
           <button
             key={course.id}
             className={`relative border-2 border-blue-500 rounded-lg p-5 bg-white shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105
@@ -70,6 +76,7 @@ export default function Courses() {
               {activeCourse ? `${activeCourse.percentage}%` : "Start!"}
             </span>
           </button>
+          // </Link>
         );
       })}
     </div>
