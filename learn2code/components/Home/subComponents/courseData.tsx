@@ -45,3 +45,5 @@ export const courseList = [
       description: 'Adapt to the modern web with this course on responsive web design. Learn how to make websites that look good and function well on any device, from desktops to smartphones.' 
     }
 ];
+
+export const userId = "646cfc7e3c37f4d800808c4c";

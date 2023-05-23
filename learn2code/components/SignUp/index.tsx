@@ -4,6 +4,7 @@ import InputComponent from "./subComponents/inputComponent";
 import SelectComponent from "./subComponents/selectComponent";
 import PasswordComponent from "./subComponents/passwordComponent";
 import { User, submitForm } from '../../lib/signUp/signup'
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const {
@@ -12,7 +13,19 @@ export default function SignupPage() {
     formState: { errors },
     watch,
   } = useForm<User>();
-  const onSubmit = (data: User) => submitForm(data);
+
+  const router = useRouter();
+
+  const onSubmit = async (data: User) => {
+    const signupSuccessful = await submitForm(data);
+    if (signupSuccessful) {
+      router.push("/");
+    } else {
+      console.log("test");
+      // Handle errors here
+    }
+  };
+
 
   const password = watch("password");
   const email = watch("email");

@@ -12,8 +12,7 @@ router.get('/:userId/activeCourses', async (req, res) => {
         }
 
         res.status(200).json({ coursesActive: user.coursesActive });
-        console.log('works');
-        console.log(user.coursesActive);
+        console.log('Active courses retrieved successfully');
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
