@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import InputComponent from "./subComponents/inputComponent";
 import SelectComponent from "./subComponents/selectComponent";
 import PasswordComponent from "./subComponents/passwordComponent";
+import { User, submitForm } from '../../lib/signUp/signup'
 
 export default function SignupPage() {
   const {
@@ -10,8 +11,8 @@ export default function SignupPage() {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  } = useForm<User>();
+  const onSubmit = (data: User) => submitForm(data);
 
   const password = watch("password");
   const email = watch("email");
@@ -31,26 +32,32 @@ export default function SignupPage() {
             autoComplete="off"
           >
             <InputComponent
-              label="Full Name"
-              id="fullName"
-              {...register("fullName", { required: true })}
+              label="First Name"
+              id="firstname"
+              {...register("firstName", { required: true })}
             />
             {errors.firstName && (
               <p className="text-red-500 text-xs pt-2">
-                Full Name is required
+                First Name is required
               </p>
             )}
 
             <InputComponent
-              label="Date of Birth"
-              id="dob"
-              type="date"
-              {...register("dob", { required: true })}
+              label="Last Name"
+              id="lastname"
+              {...register("lastName", { required: true })}
             />
-            {errors.dob && (
-              <p className="text-red-500 text-xs pt-2">
-                Date of birth is required
-              </p>
+            {errors.firstName && (
+              <p className="text-red-500 text-xs pt-2">Last Name is required</p>
+            )}
+
+            <InputComponent
+              label="Username"
+              id="username"
+              {...register("username", { required: true })}
+            />
+            {errors.firstName && (
+              <p className="text-red-500 text-xs pt-2">username is required</p>
             )}
 
             <InputComponent
@@ -63,32 +70,13 @@ export default function SignupPage() {
               <p className="text-red-500 text-xs pt-2">Email is required</p>
             )}
 
-            <InputComponent
-              label="Confirm Email"
-              id="confirmEmail"
-              type="email"
-              {...register("confirmEmail", {
-                required: "Please confirm your email",
-                validate: (value) =>
-                  value === email || "The emails do not match",
-              })}
-            />
-            {errors.confirmEmail &&
-              typeof errors.confirmEmail.message === "string" && (
-                <p className="text-red-500 text-xs pt-2">
-                  {errors.confirmEmail.message}
-                </p>
-              )}
-
             <PasswordComponent
               label="Password"
               id="password"
               {...register("password", { required: true })}
             />
             {errors.password && (
-              <p className="text-red-500 text-xs pt-2">
-                Password is required
-              </p>
+              <p className="text-red-500 text-xs pt-2">Password is required</p>
             )}
 
             <PasswordComponent

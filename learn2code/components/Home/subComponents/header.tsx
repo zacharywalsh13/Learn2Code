@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   return (

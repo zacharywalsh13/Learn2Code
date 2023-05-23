@@ -1,25 +1,26 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const userRoutes = require('./routes/users');
+const addCourseRoute = require('./routes/addCourse');
+const activeCoursesRoute = require('./routes/userCourses');
 
-app.set('view engine', 'ejs')
+require ('dotenv').config();
 
-app.get('/', (req, res) => {
-    res.render('index.ejs', {name: 'John'})
-})
+const app = express();
 
-app.get('/login', (req, res) => {
-    res.render('login.ejs')
-})
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
+app.use('/users', userRoutes);
+app.use('/addCourse', addCourseRoute);
+app.use('/users', activeCoursesRoute);
 
-app.get('/register', (req, res) => {
-    res.render('register.ejs')
-})
-
-app.post('/register', (req, res) => {
-    res.send('register')
-})
-
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log('Connected to MongoDB'))
+.catch((err) => console.log(err));
 
 app.listen(3001)
-
-
