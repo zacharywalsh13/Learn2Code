@@ -46,4 +46,3 @@ export const courseList = [
     }
 ];
 
-export const userId = "646cfc7e3c37f4d800808c4c";

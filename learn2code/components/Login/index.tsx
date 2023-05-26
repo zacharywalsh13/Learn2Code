@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { loginUser, UserLoginData } from "../../lib/login/index";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -14,7 +17,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   const onSubmit = async (data: UserLoginData) => {
-    const loginSuccessful = await loginUser(data);
+    const loginSuccessful = await loginUser(data, dispatch);
     if (loginSuccessful) {
       router.push("/");
     } else {
