@@ -9,7 +9,7 @@ import { UserState } from '../../../lib/redux/userSlice'
 export default function Courses() {
   const router = useRouter();
   const user = useSelector((state: { user: UserState }) => state.user);
-  const userId = user.id;
+  const userId = user._id;
 
 
   const [activeCourses, setActiveCourses] = useState<
@@ -26,20 +26,18 @@ export default function Courses() {
           const data = await response.json();
           setActiveCourses(data.coursesActive);
           console.log(data.coursesActive);
+          console.log("sucessfully fetched active courses");
         }
       } catch (error) {
         console.error("Error fetching active courses", error);
+        console.log("Error fetching active courses");
       }
     };
     fetchActiveCourses();
   }, [userId]);
+  
 
   const handleCourseClick = async (courseId: string, courseTitle: string) => {
-    if(!userId) {
-      // If the user is not logged in, redirect them to the login page.
-      router.push('/login');
-      return;
-    }
     try {
       const response = await fetch(
         "http://localhost:3001/addCourse/addCourse",

@@ -6,7 +6,7 @@ type CourseActive = {
 }
 
 export type UserState = {
-  id: string | null,
+  _id: string | null,
   firstName: string | null,
   lastName: string | null,
   username: string | null,
@@ -16,7 +16,7 @@ export type UserState = {
 }
 
 const initialState: UserState = {
-  id: null,
+  _id: null,
   firstName: null,
   lastName: null,
   username: null,
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<UserState>) => {
       // Modify the state based on action.payload
-      state.id = action.payload.id;
+      state._id = action.payload._id;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.username = action.payload.username;

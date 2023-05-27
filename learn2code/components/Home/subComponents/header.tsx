@@ -6,11 +6,11 @@ import Link from 'next/link';
 export default function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state: { user: UserState }) => state.user);
-  const isLoggedIn = user?.id !== null; // or however you define logged in state
+  const isLoggedIn = user._id !== null; // or however you define logged in state
 
   const handleLogout = () => {
     dispatch(login({
-      id: null,
+      _id: null,
       firstName: null,
       lastName: null,
       username: null,
@@ -18,6 +18,8 @@ export default function Header() {
       coursesActive: [],
       coursesCompleted: [],
     }));
+
+    window.location.reload();
   }
 
   return (
